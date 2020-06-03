@@ -23,6 +23,7 @@ $setArticles = $pdo->query($sql);
     <meta charset="UTF-8">
 </head>
 <body>
+<h2>My Blog</h2>
 <form method="post" action="">
     <label for="title">Input title article</label>
     <input id="title" type="text" name="title"/>
