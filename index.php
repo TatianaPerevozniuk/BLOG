@@ -1,15 +1,18 @@
 <?php
 
 require 'DbConnector.php';
-
+$t = 1;
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $articleTitle = trim($_POST['title']);
     $articleText = $_POST['text'];
     $createdAt = date('Y-m-d H:i:s');
-
-    $result = DbConnector::getConnection()->query("INSERT INTO articles (title, text, createdAt) VALUES ('$articleTitle','$articleText','$createdAt')");
-    if (!$result) {
-        echo 'Information not entered into the database';
+    if (!$articleTitle or !$articleText) {
+        $error = 'Error: Empty field.';
+    } else {
+        $result = DbConnector::getConnection()->query("INSERT INTO articles (title, text, createdAt) VALUES ('$articleTitle','$articleText','$createdAt')");
+        if (!$result) {
+            echo 'Information not entered into the database';
+        }
     }
 }
 
@@ -25,6 +28,11 @@ $setArticles = DbConnector::getConnection()->query($sql);
 <body>
 <h2>My Blog</h2>
 <form method="post" action="">
+    <?php
+    if (isset($error)) {
+        echo '<p>' . $error . '</p>';
+    }
+    ?>
     <label for="title">Input title article</label>
     <input id="title" type="text" name="title"/>
     <br><br>
