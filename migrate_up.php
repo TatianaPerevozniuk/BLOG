@@ -1,6 +1,6 @@
 <?php
 
-require 'configDB.php';
+require 'DbConnector.php';
 
 $sql = "CREATE TABLE articles (
 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,

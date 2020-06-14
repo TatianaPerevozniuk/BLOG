@@ -1,6 +1,6 @@
 <?php
 
-require 'configDB.php';
+require 'DbConnector.php';
 
 $sql = "DROP TABLE articles";
 $result = $pdo->query($sql);

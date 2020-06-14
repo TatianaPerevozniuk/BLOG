@@ -1,20 +1,20 @@
 <?php
 
-require 'configDB.php';
+require 'DbConnector.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $articleTitle = $_POST['title'];
+    $articleTitle = trim($_POST['title']);
     $articleText = $_POST['text'];
     $createdAt = date('Y-m-d H:i:s');
 
-    $result = $pdo->query("INSERT INTO articles (title, text, createdAt) VALUES ('$articleTitle','$articleText','$createdAt')");
+    $result = DbConnector::getConnection()->query("INSERT INTO articles (title, text, createdAt) VALUES ('$articleTitle','$articleText','$createdAt')");
     if (!$result) {
         echo 'Information not entered into the database';
     }
 }
 
 $sql = "SELECT * FROM articles ORDER BY createdAt DESC";
-$setArticles = $pdo->query($sql);
+$setArticles = DbConnector::getConnection()->query($sql);
 
 ?>
 <html lang="eu">
