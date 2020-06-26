@@ -25,7 +25,7 @@
     <br>
     <input type="submit" value="Submit article"/>
 </form>
-<?php foreach ($setArticles as $row): ?>
+<?php foreach ($articles as $row): ?>
     <h3><?= $row['title'] ?></h3>
     <p><?= $row['text'] ?></p>
     <p><em><?= $row['createdAt'] ?></em></p>

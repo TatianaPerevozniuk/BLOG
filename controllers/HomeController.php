@@ -3,11 +3,11 @@
 
 class HomeController
 {
-    public $setArticles;
-    public function __construct()
+    public function default()
     {
-        $sql = "SELECT * FROM articles ORDER BY createdAt DESC";
-        $setArticles = DbConnector::getConnection()->query($sql);
-        include '../pages/home.php';
+        $articleRepository = new ArticleRepository();
+        $articles = $articleRepository->getAll();
+        include  __DIR__.'/../pages/home.php';
     }
 }
+
