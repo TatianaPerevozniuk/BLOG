@@ -1,7 +1,7 @@
 <?php
 
 require 'DbConnector.php';
-$t = 1;
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $articleTitle = trim($_POST['title']);
     $articleText = $_POST['text'];
@@ -19,33 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 $sql = "SELECT * FROM articles ORDER BY createdAt DESC";
 $setArticles = DbConnector::getConnection()->query($sql);
 
-?>
-<html lang="eu">
-<head>
-    <title>article.php</title>
-    <meta charset="UTF-8">
-</head>
-<body>
-<h2>My Blog</h2>
-<form method="post" action="">
-    <?php
-    if (isset($error)) {
-        echo '<p>' . $error . '</p>';
-    }
-    ?>
-    <label for="title">Input title article</label>
-    <input id="title" type="text" name="title"/>
-    <br><br>
-    <label for="text">Input text article:</label>
-    <textarea id="text" name="text"></textarea>
-    <br>
-    <br>
-    <input type="submit" value="Submit article"/>
-</form>
-<?php foreach ($setArticles as $row): ?>
-    <h3><?= $row['title'] ?></h3>
-    <p><?= $row['text'] ?></p>
-    <p><em><?= $row['createdAt'] ?></em></p>
-<?php endforeach; ?>
-</body>
-</html>
+$controllerObject = new HomeController();
+
+
+

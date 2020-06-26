@@ -3,7 +3,7 @@
 require 'DbConnector.php';
 
 $sql = "DROP TABLE articles";
-$result = $pdo->query($sql);
+$result = DbConnector::getConnection()->query($sql);
 if ($result) {
     echo "Таблица удалена";
 }
