@@ -7,7 +7,11 @@ class HomeController
     {
         $articleRepository = new ArticleRepository();
         $articles = $articleRepository->getAll();
-        include  __DIR__.'/../pages/home.php';
+        include __DIR__ . '/../pages/home.php';
+    }
+
+    public function form()
+    {
+        die('form page');
     }
 }
-

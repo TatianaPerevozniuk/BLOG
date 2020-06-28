@@ -3,6 +3,7 @@
 require 'DbConnector.php';
 require 'controllers/HomeController.php';
 require 'repositories/ArticleRepository.php';
+
 //if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 //    $articleTitle = trim($_POST['title']);
 //    $articleText = $_POST['text'];
@@ -18,8 +19,27 @@ require 'repositories/ArticleRepository.php';
 //}
 //
 
+$url = trim($_SERVER['REQUEST_URI'], '/');
+$parts = explode('/', $url);
 
-$controllerObject = new HomeController();
-$controllerObject ->default();
+$controllerName = $parts[0];
+$controllerFullName = ucfirst($controllerName) . 'Controller';
+if (!$controllerName) {
+    $controller = new HomeController();
+} elseif (class_exists($controllerFullName)) {
+    $controller = new $controllerFullName();
+} else {
+    die('controller not found');
+}
 
+if (isset($parts[1])) {
+    $methodName = $parts[1];
+} else {
+    $methodName = 'default';
+}
 
+if (method_exists($controller, $methodName)) {
+    $controller->$methodName();
+} else {
+    die('method not found');
+}
